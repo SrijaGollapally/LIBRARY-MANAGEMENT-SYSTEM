@@ -1,0 +1,161 @@
+ show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| library            |
+| mydb               |
+| mysql              |
+| performance_schema |
+| shiva              |
+| sys                |
++--------------------+
+7 rows in set (0.04 sec)
+
+mysql> use library;
+Database changed
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| library            |
+| mydb               |
+| mysql              |
+| performance_schema |
+| shiva              |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use library;
+Database changed
+mysql> CREATE TABLE Login(
+    -> UserId varchar(100),
+    -> Password varchar(15),
+    -> PRIMARY KEY (UserId));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_library |
++-------------------+
+| login             |
++-------------------+
+1 row in set (0.01 sec)
+
+mysql> DESC LOGIN;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| UserId   | varchar(100) | NO   | PRI | NULL    |       |
+| Password | varchar(15)  | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> drop login;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'login' at line 1
+mysql> drop table login;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| library            |
+| mydb               |
+| mysql              |
+| performance_schema |
+| shiva              |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> CREATE TABLE login(PRIMARY KEY UserId VARCHAR(100), Password VARCHAR(15) NOT NULL);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VARCHAR(100), Password VARCHAR(15) NOT NULL)' at line 1
+mysql> CREATE TABLE login(UserId VARCHAR(100) PRIMARY KEY, Password VARCHAR(15) NOT NULL);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_library |
++-------------------+
+| login             |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> DESC LOGIN;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| UserId   | varchar(100) | NO   | PRI | NULL    |       |
+| Password | varchar(15)  | NO   |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> CREATE TABLE student(
+    -> id INT PRIMARY KEY,
+    -> name VARCHAR(30),
+    -> course VARCHAR(40),
+    -> branch VARCHAR(40),
+    -> semester int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE book(
+    -> id VARCHAR(15) PRIMARY KEY NOT NULL,
+    -> name VARCHAR(30),
+    -> publisher VARCHAR(40),
+    -> price DOUBLE,
+    -> year INT,
+    -> status VARCHAR(30),
+    -> issueDate DATE,
+    -> dueDate DATE,
+    -> studentid int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc login;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| UserId   | varchar(100) | NO   | PRI | NULL    |       |
+| Password | varchar(15)  | NO   |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | NO   | PRI | NULL    |       |
+| name     | varchar(30) | YES  |     | NULL    |       |
+| course   | varchar(40) | YES  |     | NULL    |       |
+| branch   | varchar(40) | YES  |     | NULL    |       |
+| semester | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc book;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | varchar(15) | NO   | PRI | NULL    |       |
+| name      | varchar(30) | YES  |     | NULL    |       |
+| publisher | varchar(40) | YES  |     | NULL    |       |
+| price     | double      | YES  |     | NULL    |       |
+| year      | int         | YES  |     | NULL    |       |
+| status    | varchar(30) | YES  |     | NULL    |       |
+| issueDate | date        | YES  |     | NULL    |       |
+| dueDate   | date        | YES  |     | NULL    |       |
+| studentid | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql>
+mysql> SELECT student.id AS student_ID, student.name AS student_name, book.id AS book_id,book.name AS book_name,book.issuedate,book.d
+uedate
+    -> FROM book
+    -> INNER JOIN student ON student.id=book.studentid;
